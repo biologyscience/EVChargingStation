@@ -1,0 +1,98 @@
+body {
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5em;
+  color: white;
+  background-color: rgb(95, 95, 95);
+}
+
+.top {
+  font-size: 3rem;
+}
+
+.data {
+  font-size: 1.75rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+.data ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.data ul.right {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-left: 2em;
+  width: 2em;
+}
+.data ul.units {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 3em;
+  justify-content: center;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+  font-size: 2rem;
+  border: 0.1em solid;
+  background-color: transparent;
+  width: 4em;
+  border-radius: 0.2em;
+  transition: box-shadow 300ms ease, background-color 300ms ease, color 300ms ease;
+}
+button:hover {
+  cursor: pointer;
+}
+button.clicked {
+  box-shadow: 0 0 0.1em 0.2em rgb(250, 250, 250);
+  color: black;
+  background-color: rgb(250, 250, 250);
+}
+button#on, button#set {
+  border-color: rgb(31, 242, 31);
+}
+button#off, button#reset {
+  border-color: rgb(242, 25, 25);
+}
+
+.energy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+}
+.energy input {
+  font-size: 1.25rem;
+  width: 50%;
+  background: none;
+  color: white;
+  border: 0.1em solid white;
+  padding: 0.5em;
+}
+.energy input:focus {
+  outline: none;
+}
+
+#message {
+  display: flex;
+  justify-content: center;
+  visibility: hidden;
+}
+#message.visible {
+  visibility: visible;
+}

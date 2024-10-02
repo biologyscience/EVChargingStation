@@ -1,0 +1,22 @@
+{
+  "name": "evchargingstation",
+  "version": "1.0.0",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon 'server/index.js'",
+    "watchSASS": "sass --watch client/assets/scss/:client/assets/css/ --no-source-map"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "crc": "^4.3.2",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "onoff": "^6.0.3",
+    "serialport": "^12.0.0",
+    "socket.io": "^4.8.0"
+  }
+}

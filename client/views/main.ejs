@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="socket.io-client/socket.io.min.js"></script>
+    <script defer src="assets/js/script.js"></script>
+</head>
+<body>
+    <div class="top">Load Status</div>
+    <div class="data">
+        <ul class="left">
+            <li>Volatge</li>
+            <li>Current</li>
+            <li>Power</li>
+            <li>Energy</li>
+        </ul>
+        <ul class="right">
+            <li id="voltage"></li>
+            <li id="current"></li>
+            <li id="power"></li>
+            <li id="energy"></li>
+        </ul>
+        <ul class="units">
+            <li><strong>V</strong></li>
+            <li><strong>A</strong></li>
+            <li><strong>W</strong></li>
+            <li><strong>Wh</strong></li>
+        </ul>
+    </div>
+    <div class="buttons">     
+        <button id="on">ON</button>
+        <button id="off">OFF</button>
+    </div>
+    <div class="energy">
+        <input type="number">
+        <div class="buttons">
+            <button id="set">SET</button>
+            <button id="reset" style="display: none;">RESET</button>
+        </div>
+    </div>
+    <div id="message"></div>
+</body>
+</html>
