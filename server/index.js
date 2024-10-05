@@ -28,7 +28,7 @@ app.once('ready', () =>
 {
     require('../hardware/SSR').resetGPIO();
 
-    console.log(`Serving at: ${ip}:${port}`);
+    console.log(`Serving at: http://${ip}:${port}`);
 });
 
 const server = app.listen(port, ip, () => app.emit('ready'));

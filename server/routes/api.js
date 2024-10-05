@@ -21,13 +21,7 @@ api.post('/getData', (request, response) =>
     const { requestDataArray } = request.body;
 
     const result = { error: null };
-
-    result.voltage = Math.random() * 30;
-    result.current = Math.random() * 5;
-    result.power = result.voltage * result.current;
-    response.json(result);
-    return;
-
+    
     Modbusv2.getResponses(requestDataArray)
     .then((responses) =>
     {
