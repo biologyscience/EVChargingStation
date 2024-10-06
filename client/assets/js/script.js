@@ -68,12 +68,12 @@ socket.on('takeData', (data) =>
 });
 
 const
-    slaveID = 6,
+    ID = parseInt(document.getElementById('slaveID').innerText),
     voltageAD = 40143,
     currentAD = 40151,
     powerAD = 40103,
     energyAD = 40159,
-    requestDataArray = [ [slaveID, voltageAD], [slaveID, currentAD], [slaveID, powerAD], [slaveID, energyAD] ];
+    requestDataArray = [ [ID, voltageAD], [ID, currentAD], [ID, powerAD], [ID, energyAD] ];
 
 const INT = setInterval(() => socket.emit('wantData', requestDataArray), 2000);
 

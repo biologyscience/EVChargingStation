@@ -21,7 +21,14 @@ app.use('/api', require('./routes/api'));
 
 app.get('/', (request, response) =>
 {
-    response.render('main');
+    // response.render('main');
+
+    response.status(400).send('Provide Slave ID');
+});
+
+app.get('/:ID', (request, response) =>
+{
+    response.render('main', request.params);
 });
 
 app.once('ready', () =>
