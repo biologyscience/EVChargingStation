@@ -48,9 +48,8 @@ socket.on('takeData', (data) =>
     // VOLTAGE.innerHTML = slave[voltageAD].toFixed(2);
     // CURRENT.innerHTML = slave[currentAD].toFixed(2);
     // POWER.innerHTML = slave[powerAD].toFixed(2);
-    // ENERGY.innerHTML = slave[energyAD].toFixed(2);
-
     // energy = slave[energyAD];
+    // ENERGY.innerHTML = energy.toFixed(2);
 
     const { voltage, current, power } = data;
 
@@ -75,7 +74,7 @@ const
     energyAD = 40159,
     requestDataArray = [ [ID, voltageAD], [ID, currentAD], [ID, powerAD], [ID, energyAD] ];
 
-const INT = setInterval(() => socket.emit('wantData', requestDataArray), 2000);
+setInterval(() => socket.emit('wantData', requestDataArray), 2000);
 
 socket.on('disconnect', ({wasClean}) =>
 {
@@ -92,7 +91,7 @@ SET.addEventListener('click', () =>
 
     const message = document.getElementById('message');
 
-    message.innerHTML = `Supply will cut-off after reaching ${energyLimit} kWh`;
+    message.innerHTML = `Supply will cut-off after reaching ${energyLimit} Wh`;
 
     message.classList.add('visible');
     setTimeout(() => { message.classList.remove('visible') }, 3000);
