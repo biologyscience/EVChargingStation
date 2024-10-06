@@ -77,6 +77,13 @@ const
 
 const INT = setInterval(() => socket.emit('wantData', requestDataArray), 2000);
 
+socket.on('disconnect', ({wasClean}) =>
+{
+    if (wasClean) return;
+
+    window.location.reload();
+});
+
 SET.addEventListener('click', () =>
 {
     energyLimit = parseInt(input.value);
