@@ -3,8 +3,6 @@ const express = require('express');
 const { toggleSSR } = require('../../hardware/SSR');
 const { Modbusv2 } = require('../../hardware/modbus/Modbusv2');
 
-Modbusv2.init({ path: '/dev/ttyAMA0', baudRate: 9600, timeout: 50 });
-
 const api = express.Router();
 
 api.put('/onoff', (request, response) =>

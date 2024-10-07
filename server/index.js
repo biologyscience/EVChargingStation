@@ -1,3 +1,5 @@
+require('../hardware/modbus/Modbusv2').Modbusv2.init({ path: '/dev/ttyAMA0', baudRate: 9600, timeout: 50 });
+
 const
     express = require('express'),
     { networkInterfaces } = require('os'),
