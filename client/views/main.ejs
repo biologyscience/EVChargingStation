@@ -9,25 +9,28 @@
     <script defer src="assets/js/script.js"></script>
 </head>
 <body>
-    <div class="top">Load Status (Socket <span id="slaveID"><%= locals.ID %></span>)</div>
+    <div class="top">Load Status (Socket <%= locals.ID %>)</div>
     <div class="data">
         <ul class="left">
             <li>Volatge</li>
             <li>Current</li>
             <li>Power</li>
             <li>Energy</li>
+            <li>Frequency</li>
         </ul>
         <ul class="right">
             <li id="voltage"></li>
             <li id="current"></li>
             <li id="power"></li>
             <li id="energy"></li>
+            <li id="frequency">50</li>
         </ul>
         <ul class="units">
             <li><strong>V</strong></li>
             <li><strong>A</strong></li>
             <li><strong>W</strong></li>
             <li><strong>Wh</strong></li>
+            <li><strong>Hz</strong></li>
         </ul>
     </div>
     <div class="buttons">     
@@ -35,7 +38,7 @@
         <button id="off">OFF</button>
     </div>
     <div class="energy">
-        <input type="number">
+        <input type="number" value="0">
         <div class="buttons">
             <button id="set">SET</button>
             <button id="reset" style="display: none;">RESET</button>

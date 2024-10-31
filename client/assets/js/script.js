@@ -9,18 +9,26 @@ const
     CURRENT = document.getElementById('current'),
     POWER = document.getElementById('power'),
     ENERGY = document.getElementById('energy'),
+    FREQUENCY = document.getElementById('frequency'),
 
     input = document.querySelector('input'),
     SET = document.getElementById('set'),
     RESET = document.getElementById('reset');
 
-let energyLimit = 0;
+let energyLimit;
 
 let energy = 0;
 
-input.value = energyLimit;
-
 let state = false;
+
+const
+    ID = parseInt(window.location.pathname.split('/')[1]),
+    voltageAD = 40143,
+    currentAD = 40151,
+    powerAD = 40103,
+    energyAD = 40159,
+    frequencyAD = 40159,
+    requestDataArray = [ [ID, voltageAD], [ID, currentAD], [ID, powerAD], [ID, energyAD], [ID, frequencyAD] ];
 
 function ONOFF({target})
 {
@@ -32,6 +40,8 @@ function ONOFF({target})
     .then((response) =>
     {
         if (!response.ok) return;
+
+        state = ID === 'on';
 
         target.classList.toggle('clicked'); 
     });
@@ -50,6 +60,7 @@ socket.on('takeData', (data) =>
     // POWER.innerHTML = slave[powerAD].toFixed(2);
     // energy = slave[energyAD];
     // ENERGY.innerHTML = energy.toFixed(2);
+    // FREQUENCY.innerHTML = slave[frequencyAD].toFixed(2);
 
     const { voltage, current, power } = data;
 
@@ -65,16 +76,6 @@ socket.on('takeData', (data) =>
         state = false;
     }
 });
-
-const
-    ID = parseInt(document.getElementById('slaveID').innerText),
-    voltageAD = 40143,
-    currentAD = 40151,
-    powerAD = 40103,
-    energyAD = 40159,
-    requestDataArray = [ [ID, voltageAD], [ID, currentAD], [ID, powerAD], [ID, energyAD] ];
-
-setInterval(() => socket.emit('wantData', requestDataArray), 2000);
 
 socket.on('disconnect', ({wasClean}) =>
 {
@@ -96,3 +97,5 @@ SET.addEventListener('click', () =>
     message.classList.add('visible');
     setTimeout(() => { message.classList.remove('visible') }, 3000);
 });
+
+setInterval(() => socket.emit('wantData', requestDataArray), 2000);
