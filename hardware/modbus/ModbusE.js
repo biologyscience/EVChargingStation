@@ -122,30 +122,25 @@ class Modbus
         this.serialPort = new SerialPort({ path, baudRate, autoOpen: false });
         this.timeout = timeout;
 
-        // this.serialPort.on('open', () => console.log('opened'));
-
-        this.serialPort.on('close', () =>
-        {
-            // console.log('closed');
-
-            this.#cleanup();
-        });
-
-        // this.serialPort.on('error', console.log);
+        this.serialPort.on('close', () => this.#cleanup());
 
         this.serialPort.on('data', (responseBuffer) =>
         {
-            if (this.#requestToSend.equals(responseBuffer)) return;
+            try
+            {
+                if (this.#requestToSend.equals(responseBuffer)) return;
             
-            this.#recieved = true;
+                this.#recieved = true;
+    
+                const response = this.#decodeResponse(responseBuffer);
+    
+                const toPush = { request: this.#decodeRequest(this.#requestToSend), response };
+    
+                if (response.crc !== response.crcCalculated) toPush.comment = 'CRC Error';
+    
+                this.#responses.push(toPush);
 
-            const response = this.#decodeResponse(responseBuffer);
-
-            const toPush = { request: this.#decodeRequest(this.#requestToSend), response };
-
-            if (response.crc !== response.crcCalculated) toPush.comment = 'CRC Error';
-
-            this.#responses.push(toPush);
+            } catch (error) { return console.error(error); }
         });
     };
 
@@ -170,16 +165,18 @@ class Modbus
 
         while (this.#requests.length !== 0)
         {
-            this.#requestToSend = this.#requests.reverse().pop();
+            this.#requestToSend = this.#requests.shift();
             
-            this.#requests.reverse();
-
             this.serialPort.write(this.#requestToSend, 'HEX');
 
             await wait(this.timeout);
-        
-            if (this.#recieved) this.#recieved = false;
-            else this.#responses.push({request: this.#decodeRequest(this.#requestToSend), response: null, comment: 'Device did not reply'});
+
+            try
+            {
+                if (this.#recieved) this.#recieved = false;
+                else this.#responses.push({request: this.#decodeRequest(this.#requestToSend), response: null, comment: 'Device did not reply'});
+                
+            } catch (error) { return console.error(error); }
         };
         
         const copyResponses = [...this.#responses];
@@ -192,4 +189,4 @@ class Modbus
 
 function wait(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
 
-module.exports = { Modbusv2: new Modbus(), wait };
+module.exports = { ModbusE: new Modbus(), wait };

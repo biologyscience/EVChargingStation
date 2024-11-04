@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { toggleSSR } = require('../../hardware/SSR');
-const { Modbusv2 } = require('../../hardware/modbus/Modbusv2');
+const { ModbusE } = require('../../hardware/modbus/ModbusE');
 
 const api = express.Router();
 
@@ -20,7 +20,7 @@ api.post('/getData', (request, response) =>
 
     const result = { error: null };
     
-    Modbusv2.getResponses(requestDataArray)
+    ModbusE.getResponses(requestDataArray)
     .then((responses) =>
     {
         responses.forEach((x) =>

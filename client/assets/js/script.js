@@ -27,7 +27,7 @@ const
     currentAD = 40151,
     powerAD = 40103,
     energyAD = 40159,
-    frequencyAD = 40159,
+    frequencyAD = 40157,
     requestDataArray = [ [ID, voltageAD], [ID, currentAD], [ID, powerAD], [ID, energyAD], [ID, frequencyAD] ];
 
 function ONOFF({target})
@@ -51,24 +51,28 @@ function ONOFF({target})
 
 socket.on('takeData', (data) =>
 {
+    console.log(data);
+
     if (data.error !== null) return console.log(data.error);
 
-    // const slave = data[`slave${slaveID}`];
+    const slave = data[`slave${ID}`];
 
-    // VOLTAGE.innerHTML = slave[voltageAD].toFixed(2);
-    // CURRENT.innerHTML = slave[currentAD].toFixed(2);
-    // POWER.innerHTML = slave[powerAD].toFixed(2);
-    // energy = slave[energyAD];
-    // ENERGY.innerHTML = energy.toFixed(2);
-    // FREQUENCY.innerHTML = slave[frequencyAD].toFixed(2);
-
-    const { voltage, current, power } = data;
-
-    VOLTAGE.innerHTML = voltage.toFixed(2);
-    CURRENT.innerHTML = current.toFixed(2);
-    POWER.innerHTML = power.toFixed(2);
-    energy += power;
+    VOLTAGE.innerHTML = slave[voltageAD].toFixed(2);
+    CURRENT.innerHTML = slave[currentAD].toFixed(2);
+    POWER.innerHTML = slave[powerAD].toFixed(2);
+    energy = slave[energyAD];
     ENERGY.innerHTML = energy.toFixed(2);
+    FREQUENCY.innerHTML = slave[frequencyAD].toFixed(2);
+
+    // console.log(slave);
+
+    // const { voltage, current, power } = data;
+
+    // VOLTAGE.innerHTML = voltage.toFixed(2);
+    // CURRENT.innerHTML = current.toFixed(2);
+    // POWER.innerHTML = power.toFixed(2);
+    // energy += power;
+    // ENERGY.innerHTML = energy.toFixed(2);
 
     if ((energy >= energyLimit) && (energyLimit !== 0) && (state === true))
     {

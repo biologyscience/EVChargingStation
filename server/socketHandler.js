@@ -1,4 +1,4 @@
-const { Modbusv2 } = require('../hardware/modbus/Modbusv2');
+const { ModbusE } = require('../hardware/modbus/ModbusE');
 
 function socketHandler(socket)
 {
@@ -10,13 +10,13 @@ function socketHandler(socket)
     {
         const result = { error: null };
 
-        result.voltage = Math.random() * 30;
-        result.current = Math.random() * 5;
-        result.power = result.voltage * result.current;
-        socket.emit('takeData', result);
-        return;
+        // result.voltage = Math.random() * 30;
+        // result.current = Math.random() * 5;
+        // result.power = result.voltage * result.current;
+        // socket.emit('takeData', result);
+        // return;
 
-        Modbusv2.getResponses(requestDataArray)
+        ModbusE.getResponses(requestDataArray)
         .then((responses) =>
         {
             responses.forEach((x) =>
