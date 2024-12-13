@@ -10,6 +10,11 @@ class Modbus
     #requestToSend = undefined;
     #lineBusy = false;
 
+    //
+    // POWER VALUE FOR SLAVE ID 12
+    // WILL BREAK THE CODE
+    //
+
     // FC 03 ONLY - READ HOLDING REGISTERS
     #setRequest(slaveID, rawAddress, quantity)
     {

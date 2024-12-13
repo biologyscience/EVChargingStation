@@ -19,6 +19,7 @@ app.set('views', `${__dirname}/../client/views/`);
 app.use('/socket.io-client', express.static(`${__dirname}/../node_modules/socket.io/client-dist/`));
 app.use(express.static(`${__dirname}/../client/`));
 app.use(express.json());
+
 app.use('/api', require('./routes/api'));
 
 app.get('/', (request, response) =>

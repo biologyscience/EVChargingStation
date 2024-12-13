@@ -53,9 +53,11 @@ socket.on('takeData', (data) =>
 {
     console.log(data);
 
-    if (data.error !== null) return console.log(data.error);
+    if (data.error !== null) return console.warn(data.error);
 
     const slave = data[`slave${ID}`];
+
+    if (slave[voltageAD] === 'Device did not reply') return;
 
     VOLTAGE.innerHTML = slave[voltageAD].toFixed(2);
     CURRENT.innerHTML = slave[currentAD].toFixed(2);
